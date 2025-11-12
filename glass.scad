@@ -51,7 +51,7 @@ module haste(lado) {
     
     angulo = 180;
 color("Yellow")
-    translate([x_inicio, 0, 0])
+    translate([x_inicio, -largura_estrutura/2, 0])
     rotate([0, 0, 0])
         
     cube([ espessura_armacao,largura_estrutura, comprimento_aste], center = false);

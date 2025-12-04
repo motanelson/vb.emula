@@ -13,11 +13,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub CommandButton1_Click()
      MsgBox ("emul startup")
-     MsgBox ("run :c:\MinGW\bin\gcc -c kernel.c -o kernel.o -nostdlib ")
-     MsgBox ("run :c:\MinGW\bin\as boot.S -o boot.o")
-     MsgBox ("run :c:\MinGW\bin\ld -T link.ld boot.o kernel.o -o kernels.o")
-     MsgBox ("run :c:\MinGW\bin\objcopy kernels.o kernel.c32")
-     MsgBox ("run :c:\MinGW\bin\qemu-86_64 -kernel kernel.c32 ")
+     On Error Resume Next
+     Shell "c:\MinGW\bin\gcc -c kernel.c -o kernel.o -nostdlib"
+     Shell "c:\MinGW\bin\as boot.S -o boot.o"
+     Shell "c:\MinGW\bin\ld -T link.ld boot.o kernel.o -o kernels.elf"
+     Shell "c:\MinGW\bin\objcopy kernels.o kernel.c32"
+     Shell "c:\MinGW\bin\qemu-x86_64 -kernel kernel.elf"
 End Sub

@@ -15,11 +15,15 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Private Sub CommandButton1_Click()
 ChDir "c:\mingw\bin"
-Shell ".\gcc.exe -c kernel.c -o .\kernel.o -nostdlib"
+Shell ".\gcc.exe -nostdlib -c kernel.c -o .\kernel.o "
 Shell ".\as.exe boot.S -o .\boot.o"
-Shell ".\ld.exe -T link.ld boot.o kernel.o -o .\kernels.o"
-Shell ".\objcopy.exe -O elf32-i386 kernels.o .\kernel.c32"
-Shell ".\qemu-system-x86_64.exe -kernel .\kernel.c32"
+Shell "c:\nasm\nasm.exe mysys.S -o .\k.bin "
+Shell ".\ld.exe -T link.ld boot.o kernel.o -o .\ke.exe -nostdlib"
+Shell ".\objcopy.exe -O elf32-i386 ke.exe .\kernel.elf"
+Shell ".\objcopy.exe -O binary .\kernel.elf .\kernel.c32"
+Shell "c:\windows\system32\cmd.exe /c 'copy /b k.bin+kernel.c32 kernel.bin '"
+Shell ".\qemu-system-x86_64.exe -kernel .\kernel.bin"
 End Sub

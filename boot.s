@@ -3,12 +3,11 @@
 .section .text
 .global _start
 .global screens
-.extern _main
-
+.extern __main
 _start:
         mov 0x21cd4cff,%eax
 	mov $stack_top, %esp
-	call _main
+	call __main
 	cli
 1:	hlt
 	jmp 1b

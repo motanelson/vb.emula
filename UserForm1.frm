@@ -14,8 +14,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Private Sub CommandButton1_Click()
-Shell "".\gcc.exe -c kernel.c -o .\kernel.o -nostdlib"
+ChDir "c:\mingw\bin"
+Shell ".\gcc.exe -c kernel.c -o .\kernel.o -nostdlib"
 Shell ".\as.exe boot.S -o .\boot.o"
 Shell ".\ld.exe -T link.ld boot.o kernel.o -o .\kernels.o"
 Shell ".\objcopy.exe -O elf32-i386 kernels.o .\kernel.c32"

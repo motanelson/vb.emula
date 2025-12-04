@@ -20,6 +20,7 @@ Private Sub CommandButton1_Click()
      Shell "c:\MinGW\bin\gcc -c kernel.c -o kernel.o -nostdlib"
      Shell "c:\MinGW\bin\as boot.S -o boot.o"
      Shell "c:\MinGW\bin\ld -T link.ld boot.o kernel.o -o kernels.elf"
-     Shell "c:\MinGW\bin\objcopy kernels.o kernel.c32"
+     Shell "c:\MinGW\bin\objcopy -O elf-i386 kernels.o kernel.c32"
      Shell "c:\MinGW\bin\qemu-x86_64 -kernel kernel.elf"
 End Sub
+
